@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MULTIRESMODEL // PORTFOLIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* 1. CORE SYSTEM */
+        * { cursor: none !important; box-sizing: border-box; }
+        html { background-color: #000; scroll-behavior: smooth; }
+        body {
+            margin: 0; padding: 0; width: 100%; overflow-x: hidden;
+            font-family: "Impact", "Arial Black", sans-serif;
+            color: #ffffff; background: transparent;
+        }
+
+        /* 2. BACKGROUND */
+        #bg-layer {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddfe6d6c-9f0f-4447-a495-b7c385c54cfd/dfd60g3-5c93400f-e663-4949-a048-946a899db365.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kZGZlNmQ2Yy05ZjBmLTQ0NDctYTQ5NS1iN2MzODVjNTRjZmQvZGZkNjBnMy01YzkzNDAwZi1lNjYzLTQ5NDktYTA0OC05NDZhODk5ZGIzNjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PYgtMYVVu--6jj1Oh4IOkYLGU6XH1MHzDdk1SpSkwds');
+            background-size: cover; background-position: center;
+            filter: brightness(0.25) blur(4px); z-index: -10;
+        }
+
+        /* 3. NAVIGATION */
+        .navbar {
+            background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid rgba(160, 32, 240, 0.4);
+            padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 10000;
+            text-align: center; backdrop-filter: blur(10px);
+        }
+        .navbar a { color: #ffffff; text-decoration: none; margin: 0 20px; font-size: 13px; letter-spacing: 2px; font-family: monospace; transition: 0.3s; }
+        .navbar a:hover { color: #a020f0; text-shadow: 0 0 10px #a020f0; }
+
+        /* 4. HERO SECTION */
+        .hero { padding: 220px 20px 120px 20px; text-align: center; }
+        .hero h1 { font-size: 90px; margin: 0; line-height: 1; text-transform: uppercase; }
+        .neon-model { color: #a020f0; display: inline-block; text-shadow: 0 0 15px #a020f0; animation: neonFlicker 1.8s infinite; }
+        @keyframes neonFlicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; text-shadow: 0 0 12px #a020f0, 0 0 30px #a020f0; }
+            20%, 24%, 55% { opacity: 0.7; text-shadow: none; }
+        }
+
+        /* 5. 3-PER-ROW GRID (21 Boxes) */
+        .immersive-container { width: 95%; max-width: 1250px; margin: 0 auto; position: relative; z-index: 5; }
+        .work-grid { display: grid; grid-template-columns: repeat(3, 400px); gap: 25px; width: 100%; justify-content: center; }
+        .work-card { width: 400px; height: 400px; background: rgba(15, 15, 15, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); position: relative; transition: 0.4s; overflow: hidden; }
+        .work-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.6s; }
+        .work-card:hover { transform: scale(1.03); border-color: #a020f0; }
+        .work-card:hover img { opacity: 1; }
+        .work-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); font-size: 14px; text-align: center; }
+
+        /* 6. ABOUT, SPLITTER & DUAL CLOCK */
+        .label { color: #a020f0; display: block; margin: 100px 0 30px 0; letter-spacing: 5px; font-size: 12px; font-family: monospace; text-shadow: 0 0 8px #a020f0; }
+        .glass-panel { background: rgba(15, 15, 15, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(25px); position: relative; transition: 0.4s; padding: 45px; }
+        .about-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; margin-bottom: 30px; }
+        
+        .splitter {
+            height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #a020f0, transparent);
+            margin: 40px 0; opacity: 0.6;
+        }
+
+        .clock-container {
+            font-family: monospace; text-align: left; padding: 25px; border-left: 2px solid #a020f0;
+            background: rgba(160, 32, 240, 0.03); display: inline-block; min-width: 400px;
+        }
+        .clock-label { color: #a020f0; font-size: 11px; letter-spacing: 3px; margin-bottom: 12px; display: block; }
+        .dual-time-wrapper { display: flex; align-items: center; gap: 20px; }
+        .time-display { font-size: 32px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        .time-sep { height: 30px; width: 1px; background: rgba(255,255,255,0.2); }
+        .ampm-label { font-size: 14px; color: #a020f0; margin-left: 5px; }
+
+        /* 7. STATS & CONTACT HUB */
+        .stats-subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-box { padding: 30px 10px !important; text-align: center; }
+        .stat-val { font-size: 26px; display: block; color: #fff; }
+        .stat-label { color: #a020f0; font-size: 10px; text-transform: uppercase; margin-top: 8px; font-family: monospace; }
+
+        .contact-container { padding: 80px 40px; text-align: center; border: 1px solid rgba(160, 32, 240, 0.2); background: rgba(10, 10, 10, 0.3); backdrop-filter: blur(10px); }
+        .contact-statement { font-family: monospace; font-size: 18px; letter-spacing: 2px; color: #ccc; margin-bottom: 50px; text-transform: uppercase; }
+        .socials-flex { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; width: 100%; }
+        .social-card { background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(25px); position: relative; transition: 0.4s; padding: 35px; flex: 0 1 450px; display: flex; align-items: center; justify-content: center; color: #ffffff !important; text-decoration: none !important; font-family: monospace; font-size: 18px; }
+        .social-card::before { content: ""; position: absolute; left: 0; top: 0; width: 5px; height: 100%; background: #a020f0; transform: scaleY(0); transition: 0.4s; }
+        .social-card:hover { transform: translateY(-5px); border-color: #a020f0; }
+        .social-card:hover::before { transform: scaleY(1); }
+        .discord-glow { color: #a020f0; margin-right: 15px; font-size: 24px; filter: drop-shadow(0 0 8px #a020f0); }
+        .roblox-icon { width: 28px; height: 28px; fill: #a020f0; margin-right: 15px; filter: drop-shadow(0 0 8px #a020f0); }
+
+        footer { text-align: center; padding: 120px 0; color: #555; font-size: 11px; font-family: monospace; }
+
+        /* CURSOR */
+        #custom-cursor {
+            width: 12px; height: 12px; background: #a020f0; border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none;
+            z-index: 999999; mix-blend-mode: difference;
+            box-shadow: 0 0 15px #a020f0; will-change: transform;
+        }
+
+        @media (max-width: 1280px) { .work-grid { grid-template-columns: repeat(2, 400px); } }
+        @media (max-width: 850px) { .work-grid { grid-template-columns: 1fr; justify-items: center; } .work-card { width: 90vw; height: 90vw; } .about-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 45px; } .clock-container { min-width: auto; width: 100%; } }
+    </style>
+</head>
+<body>
+
+    <div id="bg-layer"></div>
+    <div id="custom-cursor"></div>
+
+    <div class="navbar">
+        <a href="#work" class="hover-q">WORK</a>
+        <a href="#about" class="hover-q">ABOUT</a>
+        <a href="#contact" class="hover-q">CONTACT</a>
+    </div>
+
+    <div class="hero">
+        <p style="color:#a020f0; font-family:monospace; margin-bottom:15px; letter-spacing: 3px;">>> SYSTEM_LOADED</p>
+        <h1>MULTIRES <span class="neon-model">MODEL</span></h1>
+        <p style="color: #666; margin-top: 15px; font-family: monospace; letter-spacing: 10px; font-size: 16px;">3D VISUAL ARTIST</p>
+    </div>
+
+    <div class="immersive-container">
+        
+        <div id="work">
+            <span class="label">SQUARE_ARCHIVE_TOTAL_21</span>
+            <div class="work-grid">
+                <div class="work-card hover-q"><img src="https://i.imgur.com/8zLhVvX.jpg"><div class="work-overlay">AT-AT WALKER</div></div>
+                <div class="work-card hover-q"><img src="https://i.imgur.com/t4Gndx8.jpg"><div class="work-overlay">GOTHIC CRYPT</div></div>
+                <div class="work-card hover-q"><img src="https://i.imgur.com/mD3f4m0.jpg"><div class="work-overlay">TACTICAL AXE</div></div>
+                <script>
+                    for(let i=4; i<=21; i++) {
+                        document.write(`<div class="work-card hover-q"><img src="https://via.placeholder.com/400/111/a020f0?text=${i<10?'0'+i:i}"><div class="work-overlay">PROJECT_${i<10?'0'+i:i}</div></div>`);
+                    }
+                </script>
+            </div> 
+        </div>
+
+        <div id="about">
+            <span class="label">PERSONNEL_DATA_REPORT</span>
+            <div class="about-grid">
+                <div class="glass-panel hover-q">
+                    <p style="font-family: monospace; font-size: 15px; color: #ccc; margin: 0; line-height: 1.8;">
+                        I specialize in high-fidelity <strong>Props & Weapons proficiency</strong>, delivering optimized assets for immersive environments. <br><br>
+                        Building on an 8-year career as a Roblox Developer with <strong>80M+ visits</strong>, I bring technical optimization to every model.
+                    </p>
+                </div>
+                <div class="stats-subgrid">
+                    <div class="glass-panel stat-box hover-q"><span class="stat-val">80M+</span><span class="stat-label">Visits</span></div>
+                    <div class="glass-panel stat-box hover-q"><span class="stat-val">20+</span><span class="stat-label">Clients</span></div>
+                    <div class="glass-panel stat-box hover-q"><span class="stat-val">8 YRS</span><span class="stat-label">Legacy</span></div>
+                    <div class="glass-panel stat-box hover-q"><span class="stat-val">1 YR</span><span class="stat-label">3D EXP</span></div>
+                </div>
+            </div>
+
+            <div class="splitter"></div>
+            
+            <div class="clock-container hover-q">
+                <span class="clock-label">SYSTEM_LOCAL_TIME // BERLIN_REGION_DE</span>
+                <div class="dual-time-wrapper">
+                    <div id="clock-24" class="time-display">00:00:00</div>
+                    <div class="time-sep"></div>
+                    <div id="clock-12" class="time-display" style="font-size: 26px; color: #aaa;">00:00<span class="ampm-label">AM</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact">
+            <span class="label">CONNECTION_HUB</span>
+            <div class="contact-container">
+                <div class="contact-statement">For inquiries and commissions, please connect via the platforms below:</div>
+                <div class="socials-flex">
+                    <a href="#" class="social-card hover-q">
+                        <i class="fa-brands fa-discord discord-glow"></i> @robertoscarlos1
+                    </a>
+                    <a href="#" target="_blank" class="social-card hover-q">
+                        <svg class="roblox-icon" viewBox="0 0 128 128"><path d="M101.3 124.4L11.7 108.3c-5.1-.9-8.5-5.8-7.6-10.9L20.2 7.8c.9-5.1 5.8-8.5 10.9-7.6l89.6 16.1c5.1.9 8.5 5.8 7.6 10.9l-16.1 89.6c-.9 5.1-5.8 8.5-10.9 7.6zM77.1 43.5L48.2 38.3c-1.7-.3-3.3 0.8-3.6 2.5l-5.2 28.9c-.3 1.7 0.8 3.3 2.5 3.6l28.9 5.2c1.7.3 3.3-0.8 3.6-2.5l5.2-28.9c.3-1.7-0.8-3.3-2.5-3.6z"/></svg>
+                        MultiresModel
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>&copy; 2026 MULTIRESMODEL // DUAL_SYNC_V44</footer>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        function animate() {
+            curX += (mouseX - curX) * 0.15; curY += (mouseY - curY) * 0.15;
+            cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
+            requestAnimationFrame(animate);
+        }
+        animate();
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('.hover-q, .navbar a, .work-card, .social-card')) {
+                cursor.style.width = '60px'; cursor.style.height = '60px'; cursor.style.margin = '-30px 0 0 -30px'; cursor.style.opacity = '0.35';
+            }
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('.hover-q, .navbar a, .work-card, .social-card')) {
+                cursor.style.width = '12px'; cursor.style.height = '12px'; cursor.style.margin = '0'; cursor.style.opacity = '1';
+            }
+        });
+
+        function updateClocks() {
+            const now = new Date();
+            
+            // 24hr Format
+            const opt24 = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('clock-24').innerText = new Intl.DateTimeFormat('en-GB', opt24).format(now);
+            
+            // 12hr Format
+            const opt12 = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', hour12: true };
+            const parts12 = new Intl.DateTimeFormat('en-US', opt12).formatToParts(now);
+            const h12 = parts12.find(p => p.type === 'hour').value;
+            const m12 = parts12.find(p => p.type === 'minute').value;
+            const ampm = parts12.find(p => p.type === 'dayPeriod').value;
+            
+            document.getElementById('clock-12').innerHTML = `${h12}:${m12}<span class="ampm-label">${ampm}</span>`;
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
+</body>
+</html>
