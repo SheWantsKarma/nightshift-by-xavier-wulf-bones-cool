@@ -14,29 +14,33 @@
     <meta property="og:image" content="https://i.imgur.com/TKzZ3jm.png">
     <meta name="theme-color" content="#a020f0">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MULTIRESMODEL // PORTFOLIO">
-    <meta name="twitter:description" content="3D Visual Artist & Roblox Developer with 8 years of experience.">
-    <meta name="twitter:image" content="https://i.imgur.com/TKzZ3jm.png">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* 1. CORE SYSTEM */
         * { cursor: none !important; box-sizing: border-box; }
-        html { background-color: #000; scroll-behavior: smooth; }
+        html { 
+            background-color: #000; 
+            scroll-behavior: smooth; 
+        }
+        
+        section, #work, #about, #contact {
+            scroll-margin-top: 120px;
+        }
+
         body {
             margin: 0; padding: 0; width: 100%; overflow-x: hidden;
             font-family: "Impact", "Arial Black", sans-serif;
             color: #ffffff; background: transparent;
+            user-select: none; 
         }
 
         /* 2. BACKGROUND */
         #bg-layer {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddfe6d6c-9f0f-4447-a495-b7c385c54cfd/dfd60g3-5c93400f-e663-4949-a048-946a899db365.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kZGZlNmQ2Yy05ZjBmLTQ0NDctYTQ5NS1iN2MzODVjNTRjZmQvZGZkNjBnMy01YzkzNDAwZi1lNjYzLTQ5NDktYTA0OC05NDZhODk5ZGIzNjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PYgtMYVVu--6jj1Oh4IOkYLGU6XH1MHzDdk1SpSkwds');
+            background-image: url('https://i.pinimg.com/originals/6e/24/a7/6e24a73090618629b87353dbab6f76db.gif');
             background-size: cover; background-position: center;
-            filter: brightness(0.25) blur(4px); z-index: -10;
+            filter: brightness(0.2) blur(3px); z-index: -10;
         }
 
         /* 3. NAVIGATION */
@@ -51,13 +55,58 @@
         /* 4. HERO SECTION */
         .hero { padding: 220px 20px 120px 20px; text-align: center; }
         .hero h1 { font-size: 90px; margin: 0; line-height: 1; text-transform: uppercase; }
+        
+        .low-res-text {
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px 0px rgba(160, 32, 240, 0.5);
+            animation: pixel-jitter 2s infinite step-end;
+        }
+
+        @keyframes pixel-jitter {
+            0% { transform: translate(0, 0); text-shadow: 2px 2px 0px rgba(160, 32, 240, 0.5); }
+            33% { transform: translate(-1px, 1px); text-shadow: -2px 1px 0px rgba(255, 255, 255, 0.3); }
+            66% { transform: translate(1px, -1px); text-shadow: 1px -2px 0px rgba(160, 32, 240, 0.5); }
+            100% { transform: translate(0, 0); }
+        }
+
         .flicker-neon { color: #a020f0; text-shadow: 0 0 10px #a020f0, 0 0 20px #a020f0; animation: brokenNeon 3s infinite; }
         @keyframes brokenNeon {
             0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 10px #a020f0, 0 0 20px #a020f0, 0 0 40px #a020f0; opacity: 1; }
             20%, 24%, 55%, 80% { text-shadow: none; opacity: 0.3; }
         }
 
-        /* 5. WORK GRID SYSTEM */
+        /* CUSTOM CONTEXT MENU */
+        .custom-menu {
+            position: fixed;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #a020f0;
+            backdrop-filter: blur(10px);
+            z-index: 1000000;
+            display: none;
+            flex-direction: column;
+            width: 220px;
+            box-shadow: 0 0 20px rgba(160, 32, 240, 0.4);
+        }
+        .custom-menu-item {
+            padding: 12px 20px;
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(160, 32, 240, 0.1);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        .custom-menu-item i { margin-right: 10px; font-size: 14px; color: #a020f0; }
+        .custom-menu-item:hover { background: #a020f0; color: #000; }
+        .custom-menu-item:hover i { color: #000; }
+
+        /* 5. WORK GRID */
         .immersive-container { width: 95%; max-width: 1250px; margin: 0 auto; position: relative; z-index: 5; }
         .grid-wrapper { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
         .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; width: 100%; transition: max-height 0.8s ease-in-out; }
@@ -65,11 +114,16 @@
         .grid-wrapper.collapsed::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 400px; background: linear-gradient(transparent, #000 90%); pointer-events: none; z-index: 10; }
 
         .work-card { aspect-ratio: 1/1; background: rgba(15, 15, 15, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); position: relative; transition: 0.4s; overflow: hidden; }
-        .work-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.6s; }
+        .work-card img.main-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.6s; }
         .work-card:hover { transform: scale(1.03); border-color: #a020f0; }
-        .work-card:hover img { opacity: 1; }
-        .work-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); font-size: 14px; text-align: center; }
+        .work-card:hover img.main-img { opacity: 1; }
+        
+        .watermark {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 50%; height: auto; opacity: 0.25; pointer-events: none; z-index: 5;
+        }
 
+        .work-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); font-size: 14px; text-align: center; z-index: 10; }
         .ui-btn { background: rgba(10, 10, 10, 0.9); border: 1px solid #a020f0; color: #fff; padding: 15px 40px; font-family: monospace; letter-spacing: 4px; font-size: 14px; box-shadow: 0 0 20px rgba(160, 32, 240, 0.3); transition: 0.3s; }
         .ui-btn:hover { background: #a020f0; box-shadow: 0 0 30px #a020f0; transform: scale(1.1); color: #000; }
         .show-all-btn { position: absolute; bottom: 40px; z-index: 20; }
@@ -79,75 +133,50 @@
         /* 6. ABOUT LAYOUT */
         .label { color: #a020f0; display: block; margin: 60px 0 30px 0; letter-spacing: 5px; font-size: 12px; font-family: monospace; text-shadow: 0 0 8px #a020f0; }
         .about-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: stretch; }
-        
         .accent-box { position: relative; overflow: hidden; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .accent-box::before { 
-            content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 100%; 
-            background: #a020f0; transform: scaleY(0); transition: 0.4s; z-index: 10;
-            box-shadow: 0 0 15px #a020f0;
-        }
-        
-        .accent-box:hover { transform: scale(1.02); z-index: 15; border-color: #a020f0; }
+        .accent-box::before { content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: #a020f0; transform: scaleY(0); transition: 0.4s; z-index: 10; box-shadow: 0 0 15px #a020f0; }
         .accent-box:hover::before { transform: scaleY(1); }
 
         .about-main-panel { display: grid; grid-template-columns: 1.5fr 1fr; background: rgba(15, 15, 15, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(25px); height: 100%; }
         .about-text-content { padding: 40px; border-right: 1px solid rgba(255, 255, 255, 0.05); }
-        
         .about-image-content { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; background: rgba(160, 32, 240, 0.02); }
         .profile-frame { width: 180px; height: 180px; border-radius: 50%; border: 2px solid #a020f0; overflow: hidden; box-shadow: 0 0 20px rgba(160, 32, 240, 0.3); transition: 0.5s; background: #111; }
-        .profile-frame:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(160, 32, 240, 0.5); }
         .profile-frame img { width: 100%; height: 100%; object-fit: cover; }
-        
         .software-divider { width: 80px; height: 1px; background: rgba(160, 32, 240, 0.4); margin: 20px 0; }
         .software-flex { display: flex; gap: 15px; align-items: center; }
         .soft-logo { width: 35px; height: 35px; object-fit: contain; filter: grayscale(1) brightness(0.8); transition: 0.4s; }
         .soft-logo:hover { filter: grayscale(0) brightness(1); transform: scale(1.2); }
-
         .highlight { color: #a020f0; font-weight: bold; text-shadow: 0 0 5px rgba(160, 32, 240, 0.3); }
 
+        /* UPDATED STATS HOVER */
         .stats-column { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .stat-box { padding: 35px 10px; text-align: center; background: rgba(15, 15, 15, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(25px); }
-        .stat-val { font-size: 24px; display: block; color: #fff; margin-bottom: 5px; transition: 0.3s; }
-        .stat-label { color: #a020f0; font-size: 10px; text-transform: uppercase; font-family: monospace; letter-spacing: 1px; transition: 0.3s; }
+        .stat-val { font-size: 24px; display: block; color: #fff; margin-bottom: 5px; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .stat-label { color: #a020f0; font-size: 10px; text-transform: uppercase; font-family: monospace; letter-spacing: 1px; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-        /* 7. CLOCK SYSTEM */
+        .stat-box:hover .stat-val { 
+            transform: scale(1.4); 
+            color: #fff; 
+            text-shadow: 0 0 15px #a020f0, 0 0 30px #a020f0; 
+        }
+        .stat-box:hover .stat-label { 
+            transform: scale(1.3); 
+            color: #ffffff; 
+            text-shadow: 0 0 10px #ffffff; 
+        }
+
+        /* CLOCK & CONTACT */
         .clock-container { width: 100%; max-width: 400px; margin-top: 30px; position: relative; }
-        .clock-card {
-            background: rgba(15, 15, 15, 0.7);
-            border: 1px solid rgba(160, 32, 240, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: relative;
-            transition: 0.4s;
-        }
-        .clock-card::after {
-            content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 100%;
-            background: #a020f0; box-shadow: 0 0 15px #a020f0;
-        }
+        .clock-card { background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(160, 32, 240, 0.3); backdrop-filter: blur(10px); padding: 25px; display: flex; flex-direction: column; gap: 10px; position: relative; transition: 0.4s; }
+        .clock-card::after { content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: #a020f0; box-shadow: 0 0 15px #a020f0; }
         .clock-card:hover { border-color: #a020f0; transform: translateX(10px); }
-        
-        .clock-title { 
-            font-family: monospace; color: #a020f0; 
-            font-size: 12px; letter-spacing: 4px; 
-            text-transform: uppercase; margin-bottom: 5px;
-        }
-        .time-main {
-            font-size: 48px; font-family: monospace;
-            color: #fff; text-shadow: 0 0 10px rgba(160, 32, 240, 0.5);
-            line-height: 1; letter-spacing: -2px;
-        }
-        .time-sub {
-            font-family: monospace; font-size: 14px;
-            color: #666; display: flex; align-items: center; gap: 8px;
-        }
+        .clock-title { font-family: monospace; color: #a020f0; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 5px; }
+        .time-main { font-size: 48px; font-family: monospace; color: #fff; text-shadow: 0 0 10px rgba(160, 32, 240, 0.5); line-height: 1; letter-spacing: -2px; }
+        .time-sub { font-family: monospace; font-size: 14px; color: #666; display: flex; align-items: center; gap: 8px; }
         .time-sub .ampm { color: #a020f0; font-weight: bold; }
 
         .splitter { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #a020f0, transparent); margin: 60px 0; opacity: 0.6; }
 
-        /* 8. CONTACT */
         .contact-container { padding: 80px 40px; text-align: center; border: 1px solid rgba(160, 32, 240, 0.2); background: rgba(10, 10, 10, 0.3); backdrop-filter: blur(10px); }
         .contact-statement { font-family: monospace; font-size: 18px; letter-spacing: 2px; color: #ccc; margin-bottom: 50px; text-transform: uppercase; }
         .socials-flex { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
@@ -160,22 +189,31 @@
 
         /* 9. LIGHTBOX */
         .lightbox { display: none; position: fixed; z-index: 9999999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); justify-content: center; align-items: center; flex-direction: column; }
-        .lightbox-content { max-width: 85%; max-height: 80%; border: 1px solid rgba(160, 32, 240, 0.6); }
+        .lightbox-wrapper { position: relative; max-width: 85%; max-height: 80%; display: flex; justify-content: center; align-items: center; }
+        .lightbox-content { width: 100%; height: 100%; border: 1px solid rgba(160, 32, 240, 0.6); }
+        .lightbox-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40%; opacity: 0.25; pointer-events: none; z-index: 10000000; }
         #lightbox-caption { margin-top: 25px; color: #a020f0; font-family: monospace; letter-spacing: 6px; text-transform: uppercase; font-size: 20px; }
-        .lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); color: #a020f0; font-size: 50px; background: rgba(0,0,0,0.2); border: 1px solid rgba(160, 32, 240, 0.3); padding: 25px; transition: 0.3s; }
+        .lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); color: #a020f0; font-size: 50px; background: rgba(0,0,0,0.2); border: 1px solid rgba(160, 32, 240, 0.3); padding: 25px; transition: 0.3s; z-index: 100; }
         .lightbox-btn:hover { color: #fff; background: rgba(160, 32, 240, 0.2); border-color: #a020f0; }
         #prev-btn { left: 40px; }
         #next-btn { right: 40px; }
-        .close-lightbox { position: absolute; top: 30px; right: 50px; color: #a020f0; font-size: 60px; font-weight: bold; }
+        .close-lightbox { position: absolute; top: 30px; right: 50px; color: #a020f0; font-size: 60px; font-weight: bold; cursor: pointer; }
 
         #custom-cursor { width: 12px; height: 12px; background: #a020f0; border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999999; mix-blend-mode: difference; box-shadow: 0 0 15px #a020f0; will-change: transform; }
         footer { text-align: center; padding: 120px 0; color: #555; font-size: 11px; font-family: monospace; }
 
-        @media (max-width: 1050px) { .about-layout { grid-template-columns: 1fr; } .about-main-panel { grid-template-columns: 1fr; } .about-text-content { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); } }
+        @media (max-width: 1050px) { .about-layout { grid-template-columns: 1fr; } .about-main-panel { grid-template-columns: 1fr; } }
         @media (max-width: 850px) { .work-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 45px; } }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
+
+    <div id="context-menu" class="custom-menu">
+        <a href="#work" class="custom-menu-item"><i class="fas fa-archive"></i> Archive // Work</a>
+        <a href="#about" class="custom-menu-item"><i class="fas fa-user-shield"></i> Personnel // Data</a>
+        <a href="#contact" class="custom-menu-item"><i class="fas fa-network-wired"></i> Hub // Contact</a>
+        <a href="https://www.roblox.com/users/409406286/profile" target="_blank" class="custom-menu-item"><i class="fas fa-cube"></i> Terminal // Roblox</a>
+    </div>
 
     <audio id="bg-music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
@@ -187,46 +225,50 @@
     <div id="lightbox" class="lightbox">
         <span class="close-lightbox hover-q">&times;</span>
         <button id="prev-btn" class="lightbox-btn hover-q"><i class="fas fa-chevron-left"></i></button>
-        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-wrapper">
+            <img class="lightbox-content" id="lightbox-img" ondragstart="return false;">
+            <img src="https://i.imgur.com/TKzZ3jm.png" class="lightbox-watermark">
+        </div>
         <button id="next-btn" class="lightbox-btn hover-q"><i class="fas fa-chevron-right"></i></button>
         <div id="lightbox-caption"></div>
     </div>
 
     <div class="navbar">
-        <a href="#work" class="hover-q">WORK</a>
-        <a href="#about" class="hover-q">ABOUT</a>
-        <a href="#contact" class="hover-q">CONTACT</a>
+        <a href="#work" class="nav-link hover-q">WORK</a>
+        <a href="#about" class="nav-link hover-q">ABOUT</a>
+        <a href="#contact" class="nav-link hover-q">CONTACT</a>
     </div>
 
     <div class="hero">
         <p style="color:#a020f0; font-family:monospace; margin-bottom:15px; letter-spacing: 3px;">>> SYSTEM_LOADED</p>
-        <h1>Multires <span class="flicker-neon">MODEL</span></h1>
+        <h1><span class="low-res-text">Multires</span> <span class="flicker-neon">MODEL</span></h1>
         <p style="color: #666; margin-top: 15px; font-family: monospace; letter-spacing: 10px; font-size: 16px;">3D VISUAL ARTIST</p>
     </div>
 
     <div class="immersive-container">
-        
         <div id="work">
-            <span class="label">SQUARE_ARCHIVE_TOTAL_17</span>
+            <span class="label">SQUARE_ARCHIVE_TOTAL_19</span>
             <div id="grid-parent" class="grid-wrapper collapsed">
                 <div id="work-grid" class="work-grid collapsed">
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/spk7zNy.png"><div class="work-overlay">AT-AT WALKER</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/nDStPEx.png"><div class="work-overlay">WAR AXE</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/aSXK2uj.png"><div class="work-overlay">MEDIEVAL ARMOUR</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/llMwz2i.png"><div class="work-overlay">HENRI-MARTINI RIFLE</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/toCurBZ.png"><div class="work-overlay">PE-952 GENERATOR</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/FXGIgpA.png"><div class="work-overlay">PIRATE SET</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/Kn0NCms.png"><div class="work-overlay">ROYALTY SET</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/7DKbiEB.png"><div class="work-overlay">MAGICAL SWORD</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/GL3Eib2.png"><div class="work-overlay">TOMBSTONE</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/Hu7wfjB.png"><div class="work-overlay">WINDMILL</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/0aQB2Oo.jpeg"><div class="work-overlay">MEDIEVAL HELMET</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/rouiiDH.png"><div class="work-overlay">MAHE/HEALER MORPH</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/mCxqCo1.png"><div class="work-overlay">CHEST W/LOCK</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/VL1CScK.png"><div class="work-overlay">CHURCH BENCH</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/mMWeOW5.png"><div class="work-overlay">CREEPY RENDER</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/V22mFyj.png"><div class="work-overlay">RUSSIAN HONOR GUARD SHIELD</div></div>
-                    <div class="work-card hover-q"><img src="https://i.imgur.com/6IQbiKr.png"><div class="work-overlay">STONE IN SWORD</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/EGDEXXY.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">AT-AT WALKER</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/ber8i8p.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">WAR AXE</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/yHZHKzP.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">MEDIEVAL ARMOUR</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/dDiHYja.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">HENRI-MARTINI RIFLE</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/X7vM0SV.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">PE-952 GENERATOR</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/pW0Sgj8.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">PIRATE SET</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/0F5u61S.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">ROYALTY SET</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/oHZDNZA.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">MAGICAL SWORD</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/bvZDEIw.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">TOMBSTONE</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/4SMJCNA.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">WINDMILL</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/HIoJdeo.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">MEDIEVAL HELMET</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/9eSZVmB.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">MAHE/HEALER MORPH</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/TykUoGY.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">CHEST W/LOCK</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/yos25u0.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">CHURCH BENCH</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/Gk54HMI.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">CREEPY RENDER</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/LfMTOvJ.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">RUSSIAN HONOR GUARD SHIELD</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/D4MDsCA.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">STONE IN SWORD</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/NlPZcIQ.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">TEMPLE OF RA</div></div>
+                    <div class="work-card hover-q"><img class="main-img" src="https://i.imgur.com/9HjgiKv.png" ondragstart="return false;"><img src="https://i.imgur.com/TKzZ3jm.png" class="watermark"><div class="work-overlay">BASIC CRATE</div></div>
                 </div>
                 <button id="show-all-btn" class="ui-btn show-all-btn hover-q">SHOW ALL</button>
                 <button id="show-less-btn" class="ui-btn show-less-btn hover-q hidden-ui">SHOW LESS</button>
@@ -248,43 +290,21 @@
                     </div>
                     <div class="about-image-content">
                         <div class="profile-frame">
-                            <img src="https://i.imgur.com/Y2XtdFH.png" alt="Profile Image">
+                            <img src="https://i.imgur.com/Y2XtdFH.png" alt="Profile Image" ondragstart="return false;">
                         </div>
                         <div class="software-divider"></div>
                         <div class="software-flex">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg" class="soft-logo blender hover-q" title="Blender">
                             <img src="https://i.imgur.com/zs5rlGN.png" class="soft-logo studio-imgur hover-q" title="Roblox Studio">
                         </div>
-                        <div class="software-divider"></div>
-                        <div class="software-flex">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Flag_of_Romania.svg" class="soft-logo hover-q" title="Romanian" style="border-radius: 2px;">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg" class="soft-logo hover-q" title="German" style="border-radius: 2px;">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg" class="soft-logo hover-q" title="English" style="border-radius: 2px;">
-                        </div>
                     </div>
                 </div>
 
                 <div class="stats-column">
-                    <div class="stat-box accent-box hover-q">
-                        <span class="stat-label">Contributed to</span>
-                        <span class="stat-val"><span class="counter" data-target="80">0</span> Million+</span>
-                        <span class="stat-label" style="opacity: 0.5;">Visits</span>
-                    </div>
-                    <div class="stat-box accent-box hover-q">
-                        <span class="stat-label">Over</span>
-                        <span class="stat-val"><span class="counter" data-target="20">0</span></span>
-                        <span class="stat-label" style="opacity: 0.5;">Happy Clients</span>
-                    </div>
-                    <div class="stat-box accent-box hover-q">
-                        <span class="stat-label">Total of</span>
-                        <span class="stat-val"><span class="counter" data-target="8">0</span></span>
-                        <span class="stat-label" style="opacity: 0.5;">Roblox Years</span>
-                    </div>
-                    <div class="stat-box accent-box hover-q">
-                        <span class="stat-label">Dedicated</span>
-                        <span class="stat-val"><span class="counter" data-target="1">0</span></span>
-                        <span class="stat-label" style="opacity: 0.5;">Blender Year</span>
-                    </div>
+                    <div class="stat-box accent-box hover-q"><span class="stat-label">Contributed to</span><span class="stat-val"><span class="counter" data-target="80">0</span> Million+</span><span class="stat-label" style="opacity: 0.5;">Visits</span></div>
+                    <div class="stat-box accent-box hover-q"><span class="stat-label">Over</span><span class="stat-val"><span class="counter" data-target="20">0</span></span><span class="stat-label" style="opacity: 0.5;">Happy Clients</span></div>
+                    <div class="stat-box accent-box hover-q"><span class="stat-label">Total of</span><span class="stat-val"><span class="counter" data-target="8">0</span></span><span class="stat-label" style="opacity: 0.5;">Roblox Years</span></div>
+                    <div class="stat-box accent-box hover-q"><span class="stat-label">Dedicated</span><span class="stat-val"><span class="counter" data-target="1">0</span></span><span class="stat-label" style="opacity: 0.5;">Blender Year</span></div>
                 </div>
             </div>
 
@@ -292,10 +312,7 @@
                 <div class="clock-card hover-q">
                     <div class="clock-title">My Time // Germany</div>
                     <div id="clock-24" class="time-main">00:00:00</div>
-                    <div class="time-sub">
-                        <span>Standard:</span>
-                        <span id="clock-12">00:00 <span class="ampm">AM</span></span>
-                    </div>
+                    <div class="time-sub"><span>Standard:</span><span id="clock-12">00:00 <span class="ampm">AM</span></span></div>
                 </div>
             </div>
         </div>
@@ -311,28 +328,60 @@
                     <a href="https://www.roblox.com/users/409406286/profile" target="_blank" class="social-card hover-q">
                         <svg class="roblox-purple-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.926 23.998L0.128 20.71 5.074 0.002 23.872 3.29l-4.946 20.708zM15.342 8.487l-5.692-1.002-1.748 6.002 5.692 1.002 1.748-6.002z"/>
-                        </svg>
-                        MultiresModel
+                        </svg> MultiresModel
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer>&copy; 2026 MULTIRESMODEL // DUAL_SYNC_V57</footer>
+    <footer>&copy; 2026 MULTIRESMODEL // DUAL_SYNC_V61</footer>
 
     <script>
-        // AUDIO LOGIC
+        // UPDATED SMOOTH SCROLL FOR PRECISE SECTION TARGETING
+        document.querySelectorAll('.nav-link, .custom-menu-item').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetID = this.getAttribute('href');
+                if (targetID && targetID.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetID);
+                    if (targetElement) {
+                        const navHeight = 85; 
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+                document.getElementById('context-menu').style.display = 'none';
+            });
+        });
+
+        // CUSTOM CONTEXT MENU
+        const ctxMenu = document.getElementById('context-menu');
+        window.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            ctxMenu.style.display = 'flex';
+            let x = e.clientX, y = e.clientY;
+            if (x + 220 > window.innerWidth) x -= 220;
+            if (y + 160 > window.innerHeight) y -= 160;
+            ctxMenu.style.left = x + 'px';
+            ctxMenu.style.top = y + 'px';
+        });
+
+        window.addEventListener('click', (e) => { if (!ctxMenu.contains(e.target)) ctxMenu.style.display = 'none'; });
+
+        // AUDIO
         const music = document.getElementById('bg-music');
-        music.volume = 0.15; // Quiet volume
+        music.volume = 0.15; 
         document.addEventListener('click', () => { music.play(); }, { once: true });
 
-        // GRID LOGIC
+        // SHOW ALL / LESS
         const showAllBtn = document.getElementById('show-all-btn');
         const showLessBtn = document.getElementById('show-less-btn');
         const gridParent = document.getElementById('grid-parent');
         const workGrid = document.getElementById('work-grid');
-        const workSection = document.getElementById('work');
 
         showAllBtn.addEventListener('click', () => {
             workGrid.classList.remove('collapsed');
@@ -346,7 +395,7 @@
             gridParent.classList.add('collapsed');
             showAllBtn.classList.remove('hidden-ui');
             showLessBtn.classList.add('hidden-ui');
-            workSection.scrollIntoView({ behavior: 'smooth' });
+            window.scrollTo({ top: document.getElementById('work').offsetTop - 85, behavior: 'smooth' });
         });
 
         // CURSOR
@@ -360,17 +409,14 @@
         }
         animate();
         
-        // TIME LOGIC
+        // CLOCKS
         function updateClocks() {
             const now = new Date();
             const opt24 = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
             document.getElementById('clock-24').innerText = new Intl.DateTimeFormat('en-GB', opt24).format(now);
             const opt12 = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', hour12: true };
             const parts12 = new Intl.DateTimeFormat('en-US', opt12).formatToParts(now);
-            const h12 = parts12.find(p => p.type === 'hour').value;
-            const m12 = parts12.find(p => p.type === 'minute').value;
-            const ampm = parts12.find(p => p.type === 'dayPeriod').value;
-            document.getElementById('clock-12').innerHTML = `${h12}:${m12} <span class="ampm">${ampm}</span>`;
+            document.getElementById('clock-12').innerHTML = `${parts12.find(p => p.type === 'hour').value}:${parts12.find(p => p.type === 'minute').value} <span class="ampm">${parts12.find(p => p.type === 'dayPeriod').value}</span>`;
         }
         setInterval(updateClocks, 1000); updateClocks();
 
@@ -383,7 +429,7 @@
 
         function openLightbox(index) {
             currentIndex = index;
-            const img = cards[currentIndex].querySelector('img');
+            const img = cards[currentIndex].querySelector('.main-img');
             lightboxImg.src = img.src;
             lightboxCaption.innerText = cards[currentIndex].querySelector('.work-overlay').innerText;
             lightbox.style.display = 'flex';
@@ -393,8 +439,9 @@
         document.getElementById('next-btn').onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % cards.length; openLightbox(currentIndex); };
         document.getElementById('prev-btn').onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + cards.length) % cards.length; openLightbox(currentIndex); };
         lightbox.onclick = (e) => { if (e.target !== lightboxImg && !e.target.closest('.lightbox-btn')) lightbox.style.display = 'none'; };
+        document.querySelector('.close-lightbox').onclick = () => { lightbox.style.display = 'none'; };
 
-        // NUMERIC COUNTERS
+        // COUNTERS
         const counters = document.querySelectorAll('.counter');
         const counterObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
